@@ -1,0 +1,21 @@
+﻿using FinFlow.Modules.Auth.Auth.Model.Interfaces.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FinFlow.Modules.Auth.Auth.DL.Interfaces
+{
+    public interface IAuthDL
+    {
+        Task<List<IUserEntity>> GetAllUserDetails();
+        Task<IUserEntity> GetUserDetailsByUserName(string username);
+        Task<IUserEntity> GetUserDetailsById(string id);
+        Task<int> CreateUser(IUserEntity userEntity);
+        Task<IRefreshTokenEntity> GetRefreshTokenDetailsByToken(string refreshToken);
+        Task<int> InsertRefreshToken(IRefreshTokenEntity refreshTokenEntity);
+        Task<int> UpdateRefreshToken(IRefreshTokenEntity refreshTokenEntity);
+        Task<int> RevokeRefreshToken(string refreshToken);
+    }
+}

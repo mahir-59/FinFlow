@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="FinFlow.API/FinFlow.API.csproj" />
+  <Project Path="FinFlow.Modules/FinFlow.Modules.csproj" />
+</Solution>
