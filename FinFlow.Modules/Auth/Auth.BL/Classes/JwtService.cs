@@ -28,6 +28,10 @@ namespace FinFlow.Modules.Auth.Auth.BL.Classes
                 user.Id.ToString()),
 
             new Claim(
+                ClaimTypes.Role,
+                user.Role),
+
+            new Claim(
                 ClaimTypes.Name,
                 user.Username)
         };

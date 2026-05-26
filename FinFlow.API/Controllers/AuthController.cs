@@ -3,10 +3,11 @@ using FinFlow.Modules.Auth.Auth.Model.Classes.Entities;
 using FinFlow.Modules.Auth.Auth.Model.Classes.Requests;
 using FinFlow.Modules.Auth.Auth.Model.Classes.Responses;
 using FinFlow.Modules.Auth.Auth.Model.Interfaces.Entities;
+using FinFlow.Modules.Auth.Auth.Model.Interfaces.Requests;
 using FinFlow.Modules.Common.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FinFlow.API.Controllers
 {
@@ -18,12 +19,14 @@ namespace FinFlow.API.Controllers
         private readonly IAuthBL _authBL;
         private readonly IPasswordService _passwordService;
         private readonly IJwtService _jwtService;
+        private readonly IEmailService _emailService;
         private readonly IConfiguration _configuration;
-        public AuthController(IAuthBL authBL, IPasswordService passwordService, IJwtService jwtService, IConfiguration configuration)
+        public AuthController(IAuthBL authBL, IPasswordService passwordService, IJwtService jwtService, IEmailService emailService, IConfiguration configuration)
         {
             _authBL = authBL;
             _passwordService = passwordService;
             _jwtService = jwtService;
+            _emailService = emailService;
             _configuration = configuration;
         }
 
@@ -65,7 +68,9 @@ namespace FinFlow.API.Controllers
 
                 PasswordSalt = salt,
 
-                IsActive = true
+                IsActive = true,
+
+                Role = "User",
             };
 
             int result = await _authBL.CreateUser(user);
@@ -78,7 +83,7 @@ namespace FinFlow.API.Controllers
                         StatusCode = 500,
                         IsSuccess = false,
                         Message =
-                            "USer Registration failed"
+                            "User Registration failed"
                     });
             }
             return Ok(
@@ -115,7 +120,7 @@ namespace FinFlow.API.Controllers
 
             bool isPasswordValid = _passwordService.VerifyPassword(loginRequest.Password, user.PasswordHash, user.PasswordSalt);
 
-            if(isPasswordValid)
+            if (isPasswordValid)
             {
                 string accessToken = _jwtService.GenerateAccessToken(user);
 
@@ -174,7 +179,7 @@ namespace FinFlow.API.Controllers
                          Data = null
                      });
             }
-            
+
         }
 
         [AllowAnonymous]
@@ -316,6 +321,291 @@ namespace FinFlow.API.Controllers
                     Data = users
                 });
         }
-    }
 
+        [HttpGet("profile")]
+        public IActionResult Profile()
+        {
+            var username =
+                User.FindFirst(
+                    ClaimTypes.Name)?.Value;
+
+            var role =
+                User.FindFirst(
+                    ClaimTypes.Role)?.Value;
+
+            return Ok(
+                new
+                {
+                    Username = username,
+                    Role = role
+                });
+        }
+
+        [Authorize(Roles = Roles.Admin)]
+        [HttpPost("assign_roles")]
+        public async Task<IActionResult> AssignRoles(RolesRequest rolesRequest)
+        {
+            try
+            {
+                int result = await _authBL.AssignRoles(rolesRequest);
+                if (result == 0)
+                {
+                    return StatusCode(
+                        500,
+                        new ApiResponse<string>
+                        {
+                            StatusCode = 500,
+                            IsSuccess = false,
+                            Message =
+                                "USer Registration failed"
+                        });
+                }
+                return Ok(
+                   new ApiResponse<string>
+                   {
+                       StatusCode = 200,
+                       IsSuccess = true,
+                       Message =
+                           "Users Role Updated Successfully"
+                   });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
+        {
+            // Validate Email
+            if (string.IsNullOrWhiteSpace(
+                request.Email))
+            {
+                return BadRequest(
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 400,
+
+                        IsSuccess = false,
+
+                        Message = "Email is required"
+                    });
+            }
+
+            // Check User
+            var user = await _authBL.GetUserDetailsByEmail(request.Email);
+
+            if (user == null)
+            {
+                return NotFound(
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 404,
+
+                        IsSuccess = false,
+
+                        Message = "User not found"
+                    });
+            }
+
+            // Generate OTP
+            string otp =
+                new Random()
+                    .Next(100000, 999999)
+                    .ToString();
+
+            // Create OTP Entity
+            var otpEntity = new OtpRequest
+            {
+                Id = Guid.NewGuid(),
+
+                UserId = user.Id,
+
+                Otp = otp,
+
+                Purpose = "ForgotPassword",
+
+                ExpiryDate =
+                    DateTime.UtcNow.AddMinutes(5),
+
+                IsUsed = false,
+
+                CreatedAt =
+                    DateTime.UtcNow
+            };
+
+            // Save OTP
+            await _authBL.InsertOtp(otpEntity);
+
+            // TODO:
+            // Send OTP Email here
+            bool result = await _emailService.SendOtpEmail(request.Email, otpEntity.Otp);
+
+            if (result)
+            {
+                return Ok(
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 200,
+
+                        IsSuccess = true,
+
+                        Message =
+                            $"OTP Sent Successfully : {otp}"
+                    });
+            }
+            return StatusCode(
+                    500,
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 500,
+                        IsSuccess = false,
+                        Message =
+                            "OTP failed to Send"
+                    });
+        }
+
+        [AllowAnonymous]
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+        {
+            // Check User
+            var user = await _authBL.GetUserDetailsByEmail(request.Email);
+
+            if (user == null)
+            {
+                return NotFound(
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 404,
+
+                        IsSuccess = false,
+
+                        Message = "User not found"
+                    });
+            }
+
+            // Validate OTP
+            var otpEntity = await _authBL.GetValidOtp(user.Id.ToString(), request.Otp, "ForgotPassword");
+
+            if (otpEntity == null)
+            {
+                return BadRequest(
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 400,
+
+                        IsSuccess = false,
+
+                        Message =
+                            "Invalid or Expired OTP"
+                    });
+            }
+
+            // Hash New Password
+            var (hash, salt) =
+                _passwordService
+                    .HashPassword(
+                        request.NewPassword);
+
+            // Update Password
+            await _authBL.UpdatePassword(user.Id.ToString(), hash, salt);
+
+            // Mark OTP Used
+            await _authBL.MarkOtpUsed(otpEntity.Id.ToString());
+
+            // Revoke All Refresh Tokens
+            await _authBL.RevokeAllUserTokens(user.Id.ToString());
+
+            return Ok(
+                new ApiResponse<string>
+                {
+                    StatusCode = 200,
+
+                    IsSuccess = true,
+
+                    Message =
+                        "Password Reset Successful"
+                });
+        }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
+        {
+            // Get Logged-In User Id
+            string userId =
+                User.FindFirst(
+                    System.Security.Claims
+                        .ClaimTypes
+                        .NameIdentifier)?.Value;
+
+            // Get User
+            var user = await _authBL.GetUserDetailsById(userId);
+
+            if (user == null)
+            {
+                return NotFound(
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 404,
+
+                        IsSuccess = false,
+
+                        Message = "User not found"
+                    });
+            }
+
+            // Verify Old Password
+            bool isValidPassword = _passwordService.VerifyPassword(request.OldPassword, user.PasswordHash, user.PasswordSalt);
+
+            if (!isValidPassword)
+            {
+                return BadRequest(
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 400,
+
+                        IsSuccess = false,
+
+                        Message = "Old Password is incorrect"
+                    });
+            }
+
+            // Prevent Same Password
+            if (request.OldPassword == request.NewPassword)
+            {
+                return BadRequest(
+                    new ApiResponse<string>
+                    {
+                        StatusCode = 400,
+
+                        IsSuccess = false,
+
+                        Message = "New password cannot be same as old password"
+                    });
+            }
+
+            // Hash New Password
+            var (hash, salt) = _passwordService.HashPassword(request.NewPassword);
+
+            // Update Password
+            await _authBL.UpdatePassword( user.Id.ToString(), hash, salt);
+
+            // Revoke All Refresh Tokens
+            // User must login again
+            await _authBL.RevokeAllUserTokens(user.Id.ToString());
+
+            return Ok(
+                new ApiResponse<string>
+                {
+                    StatusCode = 200,
+
+                    IsSuccess = true,
+
+                    Message = "Password changed successfully"
+                });
+        }
+    }
 }

@@ -1,0 +1,88 @@
+﻿@page "/"
+@layout MainLayout
+<PageTitle>Login</PageTitle>
+<div class="login-page">
+    <div class="left-panel">
+        <div class="brand">
+            <img src="images/FinflowLogo.png" alt="FinFlow" />
+        </div>
+
+        <div class="left-content">
+            <h1>
+                Powering <span>Smarter Business</span><br />
+                Relationships
+            </h1>
+
+            <p>
+                Invoicing, Collections & Payments
+                made simple for growing businesses.
+            </p>
+
+            <img src="images/Collection.png"
+                 class="illustration"
+                 alt="Finance Illustration" />
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="login-card">
+
+            <h2>Welcome back</h2>
+            <p class="subtitle">
+                Sign in to your FinFlow account
+            </p>
+
+            <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
+
+                <div class="input-groups">
+                    <label>Email address</label>
+                    <InputText @bind-Value="loginModel.Email"
+                               class="form-input"
+                               placeholder="you@example.com" />
+                </div>
+
+                <div class="input-groups">
+                    <label>Password</label>
+
+                    <div class="password-box">
+                        <InputText @bind-Value="loginModel.Password"
+                                   type="@PasswordType"
+                                   class="form-input password-input"
+                                   placeholder="••••••••••" />
+
+                        <button type="button"
+                                class="eye-btn"
+                                @onclick="TogglePassword">
+                            @(showPassword ? "🙈" : "👁")
+                        </button>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <label class="remember">
+                        <input type="checkbox" />
+                        Remember me
+                    </label>
+
+                    <a href="/forgot-password">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <button type="submit" class="signin-btn">
+                    Sign in
+                </button>
+
+                <div class="divider">
+                    <span>or continue with</span>
+                </div>
+
+                <button type="button" class="google-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" />
+                    Sign in with Google
+                </button>
+
+            </EditForm>
+        </div>
+    </div>
+</div>
