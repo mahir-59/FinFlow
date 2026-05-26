@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IPasswordService,PasswordService>();
 builder.Services.AddScoped<IJwtService,JwtService>();
+builder.Services.AddScoped<IEmailService,EmailService>();
 builder.Services.AddSingleton<DBContext>();
 builder.Services.AddScoped<SqlHelper>();
 builder.Services.AddScoped<IAuthDL, MSSQLAuthDL>();

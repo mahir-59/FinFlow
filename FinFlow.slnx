@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
   <Project Path="FinFlow.API/FinFlow.API.csproj" />
   <Project Path="FinFlow.Modules/FinFlow.Modules.csproj" />
+  <Project Path="FinFlow.WebApp/FinFlow.WebApp.csproj" Id="d21aa472-35bc-4c42-a6bf-a899bea1f543" />
 </Solution>

@@ -1,0 +1,133 @@
+﻿@page "/verify-otp"
+@layout MainLayout
+<PageTitle>Verify Otp</PageTitle>
+
+
+<div class="otp-page">
+
+    <div class="left-panel">
+
+        <div class="brand">
+            <img src="images/FinflowLogo.png" alt="FinFlow" />
+        </div>
+
+        <div class="left-content-v">
+
+            <div class="icon-box">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h1>
+                Verify your identity
+            </h1>
+
+            <p>
+                We’ve sent a secure verification code
+                to your registered email address.
+            </p>
+
+            <div class="email-box">
+                <i class="fa-solid fa-envelope"></i>
+                xxxxxxxxx@gmail.com
+            </div>
+
+        </div>
+
+        <div class="footer">
+            © 2026 FinFlow. All rights reserved.
+        </div>
+
+    </div>
+
+    <div class="right-panel">
+
+        <div class="otp-card">
+
+            <h2>OTP Verification</h2>
+
+            <p class="subtitle">
+                Enter the 6-digit code sent to your email
+            </p>
+
+            <EditForm Model="@otpModel"
+                      OnValidSubmit="VerifyOTP">
+
+                <div class="otp-container">
+
+                    <input id="otp1" class="otp-input"
+                           maxlength="1"
+                           type="text"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           oninput="moveNext(this, 'otp2')" />
+
+                    <input id="otp2" class="otp-input"
+                           maxlength="1"
+                           type="text"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           oninput="moveNext(this, 'otp3')"
+                           onkeydown="movePrevious(event, this, 'otp1')" />
+
+                    <input id="otp3" class="otp-input"
+                           maxlength="1"
+                           type="text"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           oninput="moveNext(this, 'otp4')"
+                           onkeydown="movePrevious(event, this, 'otp2')" />
+
+                    <input id="otp4" class="otp-input"
+                           maxlength="1"
+                           type="text"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           oninput="moveNext(this, 'otp5')"
+                           onkeydown="movePrevious(event, this, 'otp3')" />
+
+                    <input id="otp5" class="otp-input"
+                           maxlength="1"
+                           type="text"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           oninput="moveNext(this, 'otp6')"
+                           onkeydown="movePrevious(event, this, 'otp4')" />
+
+                    <input id="otp6" class="otp-input"
+                           maxlength="1"
+                           type="text"
+                           inputmode="numeric"
+                           pattern="[0-9]*"
+                           onkeydown="movePrevious(event, this, 'otp5')" />
+
+                </div>
+
+                <button type="submit"
+                        class="verify-btn">
+                    Verify OTP
+                </button>
+
+                <div class="resend-section">
+
+                    <span>
+                        Didn't receive code?
+                    </span>
+
+                    <button type="button"
+                            class="resend-btn">
+                        Resend
+                    </button>
+
+                </div>
+
+                <div class="timer">
+                    Code expires in 01:48
+                </div>
+
+            </EditForm>
+
+        </div>
+
+    </div>
+
+</div>
