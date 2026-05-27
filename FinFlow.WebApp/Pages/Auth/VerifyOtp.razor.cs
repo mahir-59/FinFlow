@@ -11,7 +11,7 @@ namespace FinFlow.WebApp.Pages.Auth
 
         private async Task VerifyOTP()
         {
-
+            _navigationManager.NavigateTo("/create-password");
         }
 
         public class OtpModel

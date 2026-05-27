@@ -53,7 +53,14 @@
                         <button type="button"
                                 class="eye-btn"
                                 @onclick="TogglePassword">
-                            @(showPassword ? "🙈" : "👁")
+                                @if (showPassword)
+                                {
+                                    <i class="fa-solid fa-eye-slash"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-eye"></i>
+                                }
                         </button>
                     </div>
                 </div>
