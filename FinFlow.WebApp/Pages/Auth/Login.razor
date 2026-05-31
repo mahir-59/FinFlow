@@ -1,5 +1,8 @@
 ﻿@page "/"
+@using FinFlow.Modules.Auth.Auth.BL.Interfaces
 @layout MainLayout
+@inject ILoginViewModel _loginViewModel
+
 <PageTitle>Login</PageTitle>
 <div class="login-page">
     <div class="left-panel">
@@ -32,13 +35,13 @@
                 Sign in to your FinFlow account
             </p>
 
-            <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
-
+            <EditForm Model="@loginModel" OnValidSubmit="OnLoginClick">
+                <DataAnnotationsValidator />
                 <div class="input-groups">
-                    <label>Email address</label>
-                    <InputText @bind-Value="loginModel.Email"
-                               class="form-input"
-                               placeholder="you@example.com" />
+                    <label>Username</label>
+                    <InputText @bind-Value="loginModel.Username"
+                               class="form-input" />
+                    <ValidationMessage For="@(() => loginModel.Username)" />
                 </div>
 
                 <div class="input-groups">
@@ -63,6 +66,7 @@
                                 }
                         </button>
                     </div>
+                    <ValidationMessage For="@(() => loginModel.Password)" />
                 </div>
 
                 <div class="options">

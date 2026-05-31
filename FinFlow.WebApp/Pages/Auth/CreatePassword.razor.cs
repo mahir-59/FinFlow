@@ -51,7 +51,7 @@ namespace FinFlow.WebApp.Pages.Auth
 
         private async Task CreatePasswordBtn()
         {
-
+            _navigationManager.NavigateTo("/reset-success");
         }
         private void CheckPasswordStrength(string e)
         {

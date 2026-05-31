@@ -1,0 +1,29 @@
+﻿@using FinFlow.WebApp.Services
+@implements IDisposable
+@inject PopupService PopupService
+
+@if (IsVisible)
+{
+    <div class="popup @CssClass">
+
+        <div class="popup-icon">
+            @if (CssClass == "success")
+            {
+                <i class="fa-solid fa-check"></i>
+            }
+            else
+            {
+                <i class="fa-solid fa-xmark"></i>
+            }
+        </div>
+
+        <div class="popup-message">
+            @Message
+        </div>
+
+        <button class="popup-close" @onclick="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
+}

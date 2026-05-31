@@ -3,6 +3,9 @@
     <File Path=".gitignore" />
   </Folder>
   <Project Path="FinFlow.API/FinFlow.API.csproj" />
+  <Project Path="FinFlow.App/FinFlow.App.csproj" Id="f9cbfbbd-e689-4907-b828-e087c788d428">
+    <Deploy Solution="Debug|*" />
+  </Project>
   <Project Path="FinFlow.Modules/FinFlow.Modules.csproj" />
   <Project Path="FinFlow.WebApp/FinFlow.WebApp.csproj" Id="d21aa472-35bc-4c42-a6bf-a899bea1f543" />
 </Solution>

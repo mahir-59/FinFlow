@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using FinFlow.Modules.Auth.Auth.Model.Classes.Requests;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ namespace FinFlow.WebApp.Pages.Auth
 {
     public partial class Login : ComponentBase
     {
-        private LoginModel loginModel = new();
+        private LoginRequest loginModel = new();
 
         private bool showPassword = false;
 
@@ -19,9 +20,16 @@ namespace FinFlow.WebApp.Pages.Auth
             showPassword = !showPassword;
         }
 
-        private async Task HandleLogin()
+        private async Task OnLoginClick()
         {
-
+            _loaderService.Show();
+            bool isLoggedIn = await _loginViewModel.HandleLogin(loginModel);
+            if(!isLoggedIn)
+            {
+                _popupService.ShowError("Login failed. Please check your credentials and try again.");
+            }
+            await Task.Delay(5000);
+            _loaderService.Hide();
         }
 
         public class LoginModel

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinFlow.Modules.Auth.Auth.Model.Interfaces.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinFlow.Modules.Auth.Auth.Model.Classes.Responses
 {
-    public class AuthResponse
+    public class LoginResponse : ILoginResponse
     {
         public string AccessToken { get; set; }
 

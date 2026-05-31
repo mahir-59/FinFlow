@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using FinFlow.WebApp.Components
+@inherits LayoutComponentBase
 <div class="page">
     @* <div class="sidebar">
         <NavMenu />
@@ -8,7 +9,8 @@
         @* <div class="top-row px-4">
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div> *@
-
+        <Popup />
+        <Loader />
         <article class="content px-4">
             @Body
         </article>
