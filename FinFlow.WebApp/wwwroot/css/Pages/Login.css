@@ -244,3 +244,15 @@ body {
         justify-content: center;
     }
 }
+
+
+.validation-message {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 6px;
+    display: block;
+}
+
+.input-validation-error {
+    border: 1px solid #dc2626 !important;
+}

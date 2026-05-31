@@ -1,0 +1,99 @@
+﻿.auth-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background: #fff;
+}
+
+.back-btn {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.auth-content {
+    margin-top: 60px;
+}
+
+    .auth-content h1 {
+        font-size: 34px;
+        font-weight: 700;
+        color: #1f1f1f;
+        margin-bottom: 10px;
+    }
+
+.subtitle {
+    color: #6b7280;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.email-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 35px;
+}
+
+.otp-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.otp-box {
+    width: 52px;
+    height: 56px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    outline: none;
+}
+
+    .otp-box:focus {
+        border-color: #0b8d48;
+    }
+
+.resend-text {
+    margin-top: 30px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+    .resend-text span {
+        color: #f59e0b;
+        font-weight: 600;
+    }
+
+.secure-card {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid #eef2f7;
+}
+
+    .secure-card i {
+        color: #0b8d48;
+        font-size: 18px;
+    }
+
+    .secure-card span {
+        font-size: 14px;
+        color: #374151;
+        font-weight: 500;
+    }
+
+.secure-text {
+    text-align: center;
+    color: #9ca3af;
+    margin-top: 12px;
+    font-size: 13px;
+    padding-bottom: 20px;
+}

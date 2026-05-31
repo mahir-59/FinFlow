@@ -99,7 +99,7 @@ namespace FinFlow.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("/login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
             var user = await _authBL.GetUserDetailsByUserName(loginRequest.Username);
@@ -146,7 +146,7 @@ namespace FinFlow.API.Controllers
                 await _authBL.InsertRefreshToken(refreshTokenEntity);
 
                 var authResponse =
-                    new AuthResponse
+                    new LoginResponse
                     {
                         AccessToken = accessToken,
 
@@ -154,7 +154,7 @@ namespace FinFlow.API.Controllers
                     };
 
                 return Ok(
-                    new ApiResponse<AuthResponse>
+                    new ApiResponse<LoginResponse>
                     {
                         StatusCode = 200,
 
@@ -287,7 +287,7 @@ namespace FinFlow.API.Controllers
             string newAccessToken = _jwtService.GenerateAccessToken(user);
 
             return Ok(
-                new ApiResponse<AuthResponse>
+                new ApiResponse<LoginResponse>
                 {
                     StatusCode = 200,
 
@@ -296,7 +296,7 @@ namespace FinFlow.API.Controllers
                     Message =
                         "Token Refreshed Successfully",
 
-                    Data = new AuthResponse
+                    Data = new LoginResponse
                     {
                         AccessToken =
                             newAccessToken,
@@ -307,7 +307,7 @@ namespace FinFlow.API.Controllers
                 });
         }
 
-        [HttpGet("/GetAllUsers")]
+        [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _authBL.GetAllUserDetails();
