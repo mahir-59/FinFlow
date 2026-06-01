@@ -1,52 +1,51 @@
 ﻿@page "/verify-otp"
 @layout MainLayout
 
-<div class="auth-container">
+<div class="otp-page">
 
-    <div class="back-btn">
-        <i class="fas fa-arrow-left"></i>
-    </div>
+    <button class="back-btn">←</button>
 
-    <div class="auth-content">
+    <h1 class="title">Enter OTP</h1>
 
-        <h1>Enter OTP</h1>
-
-        <p class="subtitle">
-            Enter the 6-digit code sent to
-        </p>
-
-        <p class="email-text">
-            yourname@email.com
-        </p>
-
-        <div class="otp-container">
-
-            <input maxlength="1" class="otp-box" />
-            <input maxlength="1" class="otp-box" />
-            <input maxlength="1" class="otp-box" />
-            <input maxlength="1" class="otp-box" />
-            <input maxlength="1" class="otp-box" />
-            <input maxlength="1" class="otp-box" />
-
-        </div>
-
-        <p class="resend-text">
-            Resend OTP in
-            <span>00:42</span>
-        </p>
-
-    </div>
-
-    <div class="secure-card">
-
-        <i class="fas fa-shield-alt"></i>
-
-        <span>Email verification secure</span>
-
-    </div>
-
-    <p class="secure-text">
-        Your data is 100% secure
+    <p class="description">
+        Enter the 6-digit code sent to
     </p>
+
+    <p class="email">
+        john@example.com
+    </p>
+
+    <div class="otp-wrapper"
+         @onclick="FocusInput">
+
+        <input @ref="_otpInput"
+               class="hidden-input"
+               maxlength="6"
+               inputmode="numeric"
+               value="@OtpValue"
+               @oninput="HandleOtpInput" />
+
+        @for (int i = 0; i < 6; i++)
+        {
+            var isActive = OtpValue.Length == i;
+            var isFilled = OtpValue.Length > i;
+
+            <div class="otp-box
+                @(isActive ? "active" : "")
+                @(isFilled ? "filled" : "")">
+                @(isFilled ? OtpValue[i] : "")
+            </div>
+        }
+
+    </div>
+
+    <p class="resend-text">
+        Resend OTP in
+        <span class="timer">00:42</span>
+    </p>
+
+    <div class="secure-text">
+        ⓘ Your data is 100% secure
+    </div>
 
 </div>
