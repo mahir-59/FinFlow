@@ -1,35 +1,43 @@
 ﻿@page "/"
 @layout MainLayout
 
-<div class="auth-container">
+
+<div class="login-container">
 
     <div class="back-btn">
-        <i class="fas fa-arrow-left"></i>
+        <span>&larr;</span>
     </div>
 
-    <div class="auth-content">
+    <div class="content">
 
-        <h1>Welcome back!</h1>
+        <h1 class="title">Welcome back!</h1>
         <p class="subtitle">Login to continue</p>
 
-        <div class="form-group">
+        <div class="input-group">
             <label>Email Address</label>
 
-            <div class="input-wrapper">
-                <i class="fas fa-envelope"></i>
-
+            <div class="email-box">
                 <input type="email"
-                       placeholder="Enter your email"
-                       @bind="Email" />
+                       placeholder="john@example.com" />
             </div>
         </div>
 
-        <button class="primary-btn" @onclick="SendOtp">
+        <button class="otp-btn" @onclick="SendOtp">
             Send OTP
+        </button>
+        <button class="otp-btn" @onclick="@(() => _navigationManager.NavigateTo("create-password"))">
+            Create Password
+        </button>
+        <button class="otp-btn" @onclick="@(() => _navigationManager.NavigateTo("forgot-password"))">
+            Forgot Password
+        </button>
+        <button class="otp-btn" @onclick="@(() => _navigationManager.NavigateTo("password-changed"))">
+            Success Password
         </button>
 
         <p class="info-text">
-            We will send a 6-digit OTP to your email address
+            We will send a 6-digit OTP to
+            this email address
         </p>
 
     </div>
