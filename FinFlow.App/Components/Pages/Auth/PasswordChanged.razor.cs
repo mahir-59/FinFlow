@@ -7,6 +7,9 @@ namespace FinFlow.App.Components.Pages.Auth
 {
     public partial class PasswordChanged : ComponentBase
     {
-
+        public async Task GoBack()
+        {
+            await NavigationService.RaiseBackPressed();
+        }
     }
 }

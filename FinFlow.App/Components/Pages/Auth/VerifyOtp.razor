@@ -1,18 +1,15 @@
 ﻿@page "/verify-otp"
+@page "/verify-otp/{IsLogin:bool}"
 @layout MainLayout
 
 <div class="otp-page">
 
-    <button class="back-btn">←</button>
+    <button class="back-btn" @onclick="GoBack">←</button>
 
-    <h1 class="title">Enter OTP</h1>
+    <h1 class="title-vo">Enter OTP</h1>
 
-    <p class="description">
-        Enter the 6-digit code sent to
-    </p>
-
-    <p class="email">
-        john@example.com
+    <p class="description-vo">
+        Enter the 6-digit code sent to <span class="email">john@example.com</span>
     </p>
 
     <div class="otp-wrapper"
@@ -36,13 +33,25 @@
                 @(isFilled ? OtpValue[i] : "")
             </div>
         }
-
     </div>
 
-    <p class="resend-text">
-        Resend OTP in
-        <span class="timer">00:42</span>
-    </p>
+    <button class="primary-btn" @onclick="Verifyotp">
+        Verify
+    </button>
+
+    @if (CanResend)
+    {
+        <p class="resend-text">
+            <a @onclick="ResendOtp">Resend OTP</a>
+        </p>
+    }
+    else
+    {
+        <p class="resend-text">
+            Resend OTP in
+            <span class="timer">@TimeRemaining</span>
+        </p>
+    }
 
     <div class="secure-text">
         ⓘ Your data is 100% secure

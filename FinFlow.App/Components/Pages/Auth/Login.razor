@@ -1,39 +1,39 @@
-﻿@page "/"
+﻿@page "/login"
 @layout MainLayout
 
 
 <div class="login-container">
 
-    <div class="back-btn">
+    <div class="back-btn" @onclick="GoBack">
         <span>&larr;</span>
     </div>
 
     <div class="content">
+        <h1 class="title-l">Welcome back!</h1>
+        <p class="subtitle-l">Login to continue</p>
 
-        <h1 class="title">Welcome back!</h1>
-        <p class="subtitle">Login to continue</p>
+        <EditForm Model="@LoginRequest" OnValidSubmit="SendOtp">
+            <DataAnnotationsValidator />
+            <div class="input-group">
+                <label>Email Address</label>
 
-        <div class="input-group">
-            <label>Email Address</label>
-
-            <div class="email-box">
-                <input type="email"
-                       placeholder="john@example.com" />
+                <div class="email-box">
+                    <InputText
+                        type="email"
+                        @bind-Value="LoginRequest.Email"
+                        placeholder="john@example.com" />
+                </div>
+                <ValidationMessage style="font-size:13px;" For="@(() => LoginRequest.Email)" />
             </div>
-        </div>
 
-        <button class="otp-btn" @onclick="SendOtp">
-            Send OTP
-        </button>
-        <button class="otp-btn" @onclick="@(() => _navigationManager.NavigateTo("create-password"))">
-            Create Password
-        </button>
-        <button class="otp-btn" @onclick="@(() => _navigationManager.NavigateTo("forgot-password"))">
-            Forgot Password
-        </button>
-        <button class="otp-btn" @onclick="@(() => _navigationManager.NavigateTo("password-changed"))">
-            Success Password
-        </button>
+            <div class="forgot-password">
+                <a href="/forgot-password">Forgot Password?</a>
+            </div>
+
+            <button class="otp-btn">
+                Send OTP
+            </button>
+        </EditForm>
 
         <p class="info-text">
             We will send a 6-digit OTP to

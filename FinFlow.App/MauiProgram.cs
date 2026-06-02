@@ -17,6 +17,8 @@ namespace FinFlow.App
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
+
+            builder.Services.AddTransient<NavigationService>();
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
