@@ -7,21 +7,26 @@ namespace FinFlow.App.Components.Pages.Auth
 {
     public partial class Login : ComponentBase
     {
-        private string Email = string.Empty;
+        private bool showPassword = false;
         public LoginRequest LoginRequest { get; set; } = new LoginRequest();
+        private string PasswordType =>
+            showPassword ? "text" : "password";
 
         private async Task SendOtp()
         {
-            if(!string.IsNullOrEmpty(LoginRequest.Email) && LoginRequest.Email.Contains("@"))
+            if(!string.IsNullOrEmpty(LoginRequest.UserName) && !string.IsNullOrEmpty(LoginRequest.Password))
             {
-                _navigationManager.NavigateTo("/verify-otp/true");
+                
             }
             else
             {
                 // Show error message
             }
         }
-
+        private void TogglePassword()
+        {
+            showPassword = !showPassword;
+        }
         public async Task GoBack()
         {
             await NavigationService.RaiseBackPressed();

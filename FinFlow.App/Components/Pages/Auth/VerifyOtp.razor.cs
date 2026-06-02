@@ -8,7 +8,6 @@ namespace FinFlow.App.Components.Pages.Auth;
 public partial class VerifyOtp
 {
     [Inject] private IJSRuntime JS { get; set; } = default!;
-    [Parameter] public bool IsLogin { get; set; }
 
     private ElementReference _otpInput;
 
@@ -84,10 +83,7 @@ public partial class VerifyOtp
         {
             // Verify OTP API call here
         }
-        if(IsLogin)
-            _navigationManager.NavigateTo("/dashboard");
-        else
-            _navigationManager.NavigateTo("/create-password");
+        _navigationManager.NavigateTo("/create-password");
     }
 
     public async Task GoBack()

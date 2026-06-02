@@ -20,10 +20,33 @@
                 <div class="email-box">
                     <InputText
                         type="email"
-                        @bind-Value="LoginRequest.Email"
+                               @bind-Value="LoginRequest.UserName"
                         placeholder="john@example.com" />
                 </div>
-                <ValidationMessage style="font-size:13px;" For="@(() => LoginRequest.Email)" />
+                <ValidationMessage style="font-size:13px;" For="@(() => LoginRequest.UserName)" />
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+
+                <div class="email-box">
+                    <InputText type="@PasswordType"
+                        @bind-Value="LoginRequest.Password"
+                        placeholder="*********" />
+
+                    <button type="button"
+                            class="eye-btn"
+                            @onclick="TogglePassword">
+                        @if (showPassword)
+                        {
+                            <i class="fa-solid fa-eye-slash"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-eye"></i>
+                        }
+                    </button>
+                </div>
+                <ValidationMessage style="font-size:13px;" For="@(() => LoginRequest.Password)" />
             </div>
 
             <div class="forgot-password">
