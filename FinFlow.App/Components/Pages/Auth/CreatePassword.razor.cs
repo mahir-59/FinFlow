@@ -64,5 +64,16 @@ namespace FinFlow.App.Components.Pages.Auth
                 4 => "strong",
                 _ => ""
             };
+        
+        private async Task ResetPassword()
+        {
+                // Call API to reset password here
+                _navigationManager.NavigateTo("/password-changed");
+        }
+
+        public async Task GoBack()
+        {
+            await NavigationService.RaiseBackPressed();
+        }
     }
 }

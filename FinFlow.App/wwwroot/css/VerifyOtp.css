@@ -4,6 +4,7 @@
     flex-direction: column;
     background: white;
     padding: 24px;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
 }
 .back-btn {
     border: none;
@@ -12,17 +13,19 @@
     margin-top: 10px;
 }
 
-.title {
+.title-vo {
     margin-top: 40px;
     font-size: 36px;
     font-weight: 700;
     font-family: Georgia, serif;
+    text-align: center;
     color: #222;
 }
 
-.description {
+.description-vo {
     margin-top: 20px;
     color: #666;
+    text-align: center;
     font-size: 15px;
 }
 
@@ -87,5 +90,4 @@
     text-align: center;
     color: #999;
     font-size: 14px;
-    padding-bottom: 20px;
 }

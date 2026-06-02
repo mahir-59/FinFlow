@@ -1,6 +1,28 @@
-﻿<Router AppAssembly="typeof(MauiProgram).Assembly" NotFoundPage="typeof(Pages.NotFound)">
+﻿@implements IDisposable
+@inject IJSRuntime JS
+
+<Router AppAssembly="typeof(MauiProgram).Assembly" NotFoundPage="typeof(Pages.NotFound)">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
 </Router>
+
+@code
+{
+
+    protected override void OnInitialized()
+    {
+        NavigationService.BackPressed += HandleBackPressed;
+    }
+
+    private async Task HandleBackPressed()
+    {
+        await JS.InvokeVoidAsync("history.back");
+    }
+
+    public void Dispose()
+    {
+        NavigationService.BackPressed -= HandleBackPressed;
+    }
+}

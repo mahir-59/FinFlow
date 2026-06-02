@@ -6,5 +6,14 @@
         {
             InitializeComponent();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await NavigationService.RaiseBackPressed();
+            });
+            return true; 
+        }
     }
 }

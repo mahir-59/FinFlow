@@ -5,6 +5,7 @@
     flex-direction: column;
     padding: 22px;
     position: relative;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
 }
 
 .login-container {
@@ -28,18 +29,20 @@
         font-weight: 400;
     }
 
-.title {
+.title-l {
     font-size: 42px;
     font-weight: 600;
     color: #1e1e1e;
     margin: 0;
+    text-align: center;
     line-height: 1.1;
     font-family: Georgia, serif;
 }
 
-.subtitle {
+.subtitle-l {
     margin-top: 14px;
     color: #666;
+    text-align: center;
     font-size: 18px;
     margin-bottom: 50px;
 }
@@ -99,7 +102,6 @@
 .bottom-text {
     margin-top: auto;
     text-align: center;
-    padding-bottom: 18px;
     color: #444;
     font-size: 16px;
 }
@@ -110,3 +112,21 @@
         text-decoration: none;
         margin-left: 4px;
     }
+
+
+    .forgot-password {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.forgot-password a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6C63FF; /* Use your theme color */
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
