@@ -1,0 +1,254 @@
+.ffoc-page {
+
+    min-height: 85vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 80px;
+}
+
+.ffoc-success-area {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.ffoc-success-circle {
+
+    width: 110px;
+
+    height: 110px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #E8F1EB;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.ffoc-success-circle i {
+
+    font-size: 42px;
+
+    color: #46604F;
+}
+
+.ffoc-success-check {
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #46604F;
+
+    position: absolute;
+
+    right: 8px;
+
+    bottom: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.ffoc-success-check i {
+
+    color: white;
+
+    font-size: 14px;
+}
+
+.ffoc-title {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: #202020;
+}
+
+.ffoc-subtitle {
+
+    margin-top: 10px;
+
+    color: #777;
+
+    font-size: 16px;
+}
+
+.ffoc-order-summary {
+
+    background: #FFF;
+
+    border: 1px solid #EEE7DA;
+
+    border-radius: 24px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+}
+
+.ffoc-item-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+
+    color: #404040;
+
+    font-size: 16px;
+}
+
+.ffoc-divider {
+
+    height: 1px;
+
+    background: #EEE7DA;
+
+    margin: 18px 0;
+}
+
+.ffoc-total-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+    color: #202020;
+}
+
+.ffoc-invoice-card {
+
+    background: #EAF2FB;
+
+    border-radius: 22px;
+
+    padding: 18px;
+
+    display: flex;
+
+    gap: 14px;
+
+    margin-bottom: 26px;
+}
+
+.ffoc-invoice-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #3D6EA6;
+}
+
+.ffoc-invoice-title {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: #315C8C;
+
+    margin-bottom: 6px;
+}
+
+.ffoc-invoice-text {
+
+    color: #315C8C;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.ffoc-primary-btn {
+
+    width: 100%;
+
+    height: 56px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #46604F;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    margin-bottom: 14px;
+}
+
+.ffoc-secondary-btn {
+
+    width: 100%;
+
+    height: 48px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #46604F;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+.ffoc-success-gif-wrapper {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 50px;
+}
+
+.ffoc-success-gif {
+
+    height: 150px;
+
+    object-fit: contain;
+
+    margin-top: -10px;
+    margin-bottom: -10px;
+}

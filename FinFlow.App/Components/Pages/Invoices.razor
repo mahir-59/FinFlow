@@ -1,0 +1,83 @@
+@page "/invoices"
+
+
+<div class="ffin-page">
+
+    <!-- HEADER -->
+
+    <div class="ffin-header">
+
+        <h1 class="ffin-title">
+            My Invoices
+        </h1>
+
+        <button class="ffin-sort-btn">
+            <i class="fa-solid fa-arrow-down-wide-short"></i>
+        </button>
+
+    </div>
+
+    <!-- SCROLLABLE LIST -->
+
+    <div class="ffin-list">
+
+        @foreach (var invoice in InvoicesList)
+        {
+            <div class="ffin-card">
+
+                <div class="ffin-status-line @invoice.StatusLineClass"></div>
+
+                <div class="ffin-card-content">
+
+                    <div class="ffin-card-left">
+
+                        <div class="ffin-invoice-number">
+                            @invoice.InvoiceNumber
+                        </div>
+
+                        <div class="ffin-invoice-description">
+                            @invoice.Description
+                        </div>
+
+                    </div>
+
+                    <div class="ffin-card-right">
+
+                        <div class="@($"ffin-status-badge {invoice.BadgeClass}")">
+                            @invoice.Status
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="ffin-footer">
+
+        <div>
+
+            <div class="ffin-total-label">
+                Total Outstanding
+            </div>
+
+            <div class="ffin-total-value">
+                ₹1,40,000
+            </div>
+
+        </div>
+
+        <button class="ffin-pay-btn">
+            Pay now
+        </button>
+
+    </div>
+
+</div>

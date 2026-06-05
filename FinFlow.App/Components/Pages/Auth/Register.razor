@@ -1,0 +1,112 @@
+@page "/register"
+@layout MainLayout
+
+<div class="ff-reg-shell">
+
+    <button class="ff-reg-back" @onclick="GoBack">
+        ←
+    </button>
+
+    <h1 class="ff-reg-heading">
+        Create Account
+    </h1>
+
+    <p class="ff-reg-description">
+        Join FinFlow and start managing your business efficiently.
+    </p>
+
+    <EditForm Model="@_registerRequest"
+              OnValidSubmit="RegisterbtnClick">
+
+        <DataAnnotationsValidator />
+
+        <div class="ff-reg-form-row">
+
+            <label>User Name</label>
+
+            <InputText @bind-Value="_registerRequest.Username"
+                       class="ff-reg-textbox"
+                       placeholder="John Doe" />
+
+            <ValidationMessage class="ff-reg-error"
+                               For="@(() => _registerRequest.Username)" />
+
+        </div>
+
+        <div class="ff-reg-form-row">
+
+            <label>Email Address</label>
+
+            <InputText @bind-Value="_registerRequest.Email"
+                       class="ff-reg-textbox"
+                       placeholder="john@example.com" />
+
+            <ValidationMessage class="ff-reg-error"
+                               For="@(() => _registerRequest.Email)" />
+
+        </div>
+
+        <div class="ff-reg-form-row">
+
+            <label>Password</label>
+
+            <div class="ff-reg-password-box">
+
+                <InputText type="@(PasswordType)"
+                           @bind-Value="_registerRequest.Password"
+                           placeholder="Enter password"
+                           class="ff-reg-textbox" />
+
+                <button type="button"
+                        class="ff-reg-eye-toggle"
+                        @onclick="() => showPassword = !showPassword">
+
+                    <i class="@(showPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye")"></i>
+
+                </button>
+
+            </div>
+
+            <ValidationMessage class="ff-reg-error"
+                               For="@(() => _registerRequest.Password)" />
+
+        </div>
+
+        <div class="ff-reg-form-row">
+
+            <label>Confirm Password</label>
+
+            <div class="ff-reg-password-box">
+
+                <InputText type="@(PasswordType)"
+                           @bind-Value="_registerRequest.ConfirmPassword"
+                           placeholder="Enter password"
+                           class="ff-reg-textbox" />
+
+                <button type="button"
+                        class="ff-reg-eye-toggle"
+                        @onclick="() => showPassword = !showPassword">
+
+                    <i class="@(showPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye")"></i>
+
+                </button>
+
+            </div>
+
+            <ValidationMessage class="ff-reg-error"
+                               For="@(() => _registerRequest.ConfirmPassword)" />
+
+        </div>
+
+        <button class="ff-reg-submit">
+            Continue
+        </button>
+
+    </EditForm>
+
+    <div class="ff-reg-footer">
+        Already have an account?
+        <a href="/login">Login</a>
+    </div>
+
+</div>

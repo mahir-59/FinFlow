@@ -1,71 +1,85 @@
 ﻿@page "/login"
 @layout MainLayout
+@using FinFlow.Modules.Auth.Auth.BL.Interfaces
+@inject ILoginViewModel _loginViewModel
 
+<div class="ff-login-shell">
 
-<div class="login-container">
-
-    <div class="back-btn" @onclick="GoBack">
+    <div class="ff-login-back-btn" @onclick="GoBack">
         <span>&larr;</span>
     </div>
 
-    <div class="content">
-        <h1 class="title-l">Welcome back!</h1>
-        <p class="subtitle-l">Login to continue</p>
+    <div class="ff-login-content">
 
-        <EditForm Model="@LoginRequest" OnValidSubmit="SendOtp">
+        <h1 class="ff-login-title">Welcome back!</h1>
+
+        <p class="ff-login-subtitle">
+            Login to continue
+        </p>
+
+        <EditForm Model="@LoginRequest" OnValidSubmit="SubmitBtn">
             <DataAnnotationsValidator />
-            <div class="input-group">
-                <label>Email Address</label>
 
-                <div class="email-box">
+            <div class="ff-login-field">
+
+                <label>Username</label>
+
+                <div class="ff-login-input-wrapper">
+
                     <InputText
-                        type="email"
-                               @bind-Value="LoginRequest.UserName"
-                        placeholder="john@example.com" />
+                        @bind-Value="LoginRequest.Username"
+                        placeholder="Enter username"
+                        class="ff-login-input" />
+
                 </div>
-                <ValidationMessage style="font-size:13px;" For="@(() => LoginRequest.UserName)" />
+
+                <ValidationMessage
+                    class="ff-login-validation"
+                    For="@(() => LoginRequest.Username)" />
+
             </div>
-            <div class="input-group">
+
+            <div class="ff-login-field">
+
                 <label>Password</label>
 
-                <div class="email-box">
-                    <InputText type="@PasswordType"
+                <div class="ff-login-password-wrapper">
+
+                    <InputText
+                        type="@(showPassword ? "text" : "password")"
                         @bind-Value="LoginRequest.Password"
-                        placeholder="*********" />
+                        placeholder="Enter password"
+                        class="ff-login-input" />
 
                     <button type="button"
-                            class="eye-btn"
-                            @onclick="TogglePassword">
-                        @if (showPassword)
-                        {
-                            <i class="fa-solid fa-eye-slash"></i>
-                        }
-                        else
-                        {
-                            <i class="fa-solid fa-eye"></i>
-                        }
+                            class="ff-login-eye-btn"
+                            @onclick="() => showPassword = !showPassword">
+
+                        <i class="@(showPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye")"></i>
+
                     </button>
+
                 </div>
-                <ValidationMessage style="font-size:13px;" For="@(() => LoginRequest.Password)" />
+
+                <ValidationMessage
+                    class="ff-login-validation"
+                    For="@(() => LoginRequest.Password)" />
+
             </div>
 
-            <div class="forgot-password">
+            <div class="ff-login-forgot">
                 <a href="/forgot-password">Forgot Password?</a>
             </div>
 
-            <button class="otp-btn">
-                Send OTP
+            <button class="ff-login-submit-btn">
+                Login
             </button>
-        </EditForm>
 
-        <p class="info-text">
-            We will send a 6-digit OTP to
-            this email address
-        </p>
+        </EditForm>
 
     </div>
 
-    <div class="bottom-text">
+    <div class="ff-login-footer">
         New here?
         <a href="/register">Register now</a>
     </div>

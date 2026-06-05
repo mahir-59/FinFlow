@@ -12,6 +12,25 @@ namespace FinFlow.App.Components.Pages.Auth
 
         private bool ShowPassword;
         private bool ShowConfirmPassword;
+        private bool HasMinLength =>
+            !string.IsNullOrWhiteSpace(Password) &&
+            Password.Length >= 8;
+
+        private bool HasUpperCase =>
+            !string.IsNullOrWhiteSpace(Password) &&
+            Password.Any(char.IsUpper);
+
+        private bool HasLowerCase =>
+            !string.IsNullOrWhiteSpace(Password) &&
+            Password.Any(char.IsLower);
+
+        private bool HasNumber =>
+            !string.IsNullOrWhiteSpace(Password) &&
+            Password.Any(char.IsDigit);
+
+        private bool HasSpecialCharacter =>
+            !string.IsNullOrWhiteSpace(Password) &&
+            Password.Any(ch => !char.IsLetterOrDigit(ch));
 
         private void TogglePassword()
         {

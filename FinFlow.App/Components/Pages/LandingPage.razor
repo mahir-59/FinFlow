@@ -1,0 +1,138 @@
+@page "/landing"
+
+<div class="ffh3-page">
+
+    <!-- HEADER -->
+
+    <div class="ffh3-header-row">
+
+        <div>
+
+            <div class="ffh3-greeting">
+                Good morning
+            </div>
+
+            <div class="ffh3-customer-name">
+                @CustomerName
+            </div>
+
+        </div>
+
+        <div class="ffh3-profile-avatar">
+            RD
+        </div>
+
+    </div>
+
+
+    <!-- OUTSTANDING CARD -->
+
+    <div class="ffh3-outstanding-card">
+
+        <div class="ffh3-outstanding-title">
+            Total outstanding
+        </div>
+
+        <div class="ffh3-outstanding-amount">
+            @TotalOutstanding
+        </div>
+
+        <div class="ffh3-stats-container">
+
+            <div class="ffh3-stat-box">
+                <div class="ffh3-stat-number">3</div>
+                <div class="ffh3-stat-label">Open invoices</div>
+            </div>
+
+            <div class="ffh3-stat-divider"></div>
+
+            <div class="ffh3-stat-box">
+                <div class="ffh3-stat-number ffh3-overdue-text">1</div>
+                <div class="ffh3-stat-label ffh3-overdue-text">Overdue</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ALERTS -->
+
+    <div class="ffh3-section-title">
+        ALERTS
+    </div>
+
+    <div class="ffh3-alert-card">
+
+        <div class="ffh3-alert-icon">
+
+            <i class="fa-regular fa-bell"></i>
+
+        </div>
+
+        <div class="ffh3-alert-content">
+
+            <div class="ffh3-alert-heading">
+                INV-1001 due soon
+            </div>
+
+            <div class="ffh3-alert-subtitle">
+                2 days remaining
+            </div>
+
+        </div>
+
+        <div class="ffh3-alert-arrow">
+
+            <button class="ffh3-pay-now-btn">
+                Pay now
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="ffh3-section-title">
+        QUICK ACTIONS
+    </div>
+
+    <div class="ffh3-quick-grid">
+
+        <div class="ffh3-quick-card" @onclick ="NavigateToInvoices">
+
+            <i class="fa-solid fa-file-invoice"></i>
+
+            <span>Invoices</span>
+
+        </div>
+
+        <div class="ffh3-quick-card">
+
+            <i class="fa-regular fa-credit-card"></i>
+
+            <span>Pay</span>
+
+        </div>
+
+        <div class="ffh3-quick-card" @onclick ="NavigateToShop">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span>Shop</span>
+
+        </div>
+
+        <div class="ffh3-quick-card">
+
+            <i class="fa-solid fa-box"></i>
+
+            <span>Orders</span>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,257 @@
+/* PAGE */
+
+.ffin-page {
+
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    padding-top: 50px;
+}
+
+/* HEADER */
+
+.ffin-header {
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 25px;
+}
+
+.ffin-title {
+
+    margin: 0;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    color: #202020;
+}
+
+.ffin-sort-btn {
+
+    width: 52px;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: white;
+
+    color: #46604F;
+}
+
+/* LIST */
+
+.ffin-list {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    scrollbar-width: none;
+}
+
+.ffin-list::-webkit-scrollbar {
+
+    display: none;
+}
+
+/* CARD */
+
+.ffin-card {
+
+    background: white;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    min-height: 110px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.04);
+}
+
+.ffin-status-line {
+
+    width: 5px;
+}
+
+.ffin-line-overdue {
+    background: #D94C3C;
+}
+
+.ffin-line-partial {
+    background: #D29A21;
+}
+
+.ffin-line-unpaid {
+    background: #3B82F6;
+}
+
+.ffin-card-content {
+
+    flex: 1;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.ffin-card-left {
+
+    flex: 1;
+}
+
+.ffin-invoice-number {
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.ffin-invoice-description {
+
+    color: #666;
+
+    font-size: 16px;
+}
+
+.ffin-card-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.ffin-card-right i {
+
+    color: #999;
+}
+
+/* BADGES */
+
+.ffin-status-badge {
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.ffin-badge-overdue {
+
+    background: #FDE8E4;
+
+    color: #C94735;
+}
+
+.ffin-badge-partial {
+
+    background: #F8EED7;
+
+    color: #A97414;
+}
+
+.ffin-badge-unpaid {
+
+    background: #E6F0FB;
+
+    color: #2D67A5;
+}
+
+/* FOOTER */
+
+.ffin-footer {
+
+    flex-shrink: 0;
+
+    background: #F3F5F3;
+
+    border: 1px solid #E7E1D8;
+
+    padding: 20px 24px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 14px;
+    
+    margin-bottom: 70px;
+
+    border-radius: 12px;
+}
+
+.ffin-total-label {
+
+    font-size: 14px;
+
+    color: #666;
+}
+
+.ffin-total-value {
+
+    margin-top: 6px;
+
+    font-size: 42px;
+
+    font-weight: 700;
+
+    color: #C94735;
+}
+
+.ffin-pay-btn {
+
+    border: none;
+
+    background: #1F7A4D;
+
+    color: white;
+
+    height: 60px;
+
+    padding: 0 30px;
+
+    border-radius: 20px;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}

@@ -1,0 +1,25 @@
+﻿@using FinFlow.App.Services
+@implements IDisposable
+@inject LoaderService LoaderService
+
+@if (IsVisible)
+{
+    <div class="loader-overlay">
+        <div class="loader-content">
+
+            <div class="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <span class="loader-text">
+                Loading...
+            </span>
+
+        </div>
+    </div>
+}

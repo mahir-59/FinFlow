@@ -26,7 +26,7 @@ namespace FinFlow.Modules.Auth.Auth.BL.Classes
             _apiRequestHandler = aPIRequestHandler;
             _tokenStore = tokenStore;
             _configuration = configuration;
-            _apiBaseUrl = _configuration["ApiSettings:BaseUrl"];
+            _apiBaseUrl = _configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7281";
         }
 
         public async Task<bool> HandleLogin(ILoginRequest loginRequest)

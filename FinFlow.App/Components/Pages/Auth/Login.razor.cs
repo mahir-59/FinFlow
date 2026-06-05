@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using FinFlow.Modules.Auth.Auth.Model.Classes.Requests;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,23 @@ namespace FinFlow.App.Components.Pages.Auth
         private string PasswordType =>
             showPassword ? "text" : "password";
 
-        private async Task SendOtp()
+        private async Task SubmitBtn()
         {
-            if(!string.IsNullOrEmpty(LoginRequest.UserName) && !string.IsNullOrEmpty(LoginRequest.Password))
+            _loaderService.Show();
+            if(!string.IsNullOrEmpty(LoginRequest.Username) && !string.IsNullOrEmpty(LoginRequest.Password))
             {
-                
+                // bool isLoggedIn = await _loginViewModel.HandleLogin(LoginRequest);
+                // if(!isLoggedIn)
+                // {
+                //     //_popupService.ShowError("Login failed. Please check your credentials and try again.");
+                // }
             }
             else
             {
                 // Show error message
             }
+            _navigationManager.NavigateTo("/landing");
+            _loaderService.Hide();
         }
         private void TogglePassword()
         {
