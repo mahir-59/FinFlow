@@ -19,5 +19,9 @@ namespace FinFlow.Modules.Auth.Auth.Model.Classes.Requests
         [Required]
         [MaxLength(12)]
         public string Password { get; set; }
+        
+        [Required]
+        [MaxLength(12)]
+        public string ConfirmPassword { get; set; }
     }
 }

@@ -1,0 +1,222 @@
+@page "/shop"
+
+<div class="ffshop-page">
+
+    <!-- Fixed Header Area -->
+
+    <div class="ffshop-fixed-header">
+
+        <div class="ffshop-header-row">
+
+            <h1 class="ffshop-title">
+                Shop
+            </h1>
+
+            <div class="ffshop-avatar">
+                RD
+            </div>
+
+        </div>
+
+        <div class="ffshop-search-wrapper">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input type="text"
+                   placeholder="Search products"
+                   class="ffshop-search-input" />
+
+        </div>
+
+        <div class="ffshop-filter-row">
+
+            @foreach (var category in Categories)
+            {
+                <button class="@(SelectedCategory == category
+                                    ? "ffshop-filter-active"
+                                    : "ffshop-filter-chip")"
+                        @onclick="() => SelectCategory(category)">
+                    @category
+                </button>
+            }
+
+        </div>
+
+    </div>
+
+    <!-- Scrollable Products -->
+    <div class="ffshop-products-container">
+        <div class="ffshop-products-grid">
+
+            @foreach (var product in Products)
+            {
+                <div class="ffshop-grid-card">
+
+                    <img class="ffshop-grid-image"
+                        src="@product.ImageUrl"
+                        alt="@product.Name" />
+
+                    <div class="ffshop-grid-body">
+
+                        <div class="ffshop-grid-name">
+                            @product.Name
+                        </div>
+
+                        <div class="ffshop-grid-price">
+                            ₹@product.Price / carton
+                        </div>
+
+                        @if (product.Quantity == 0)
+                        {
+                            <button class="ffshop-grid-add-btn"
+                                    @onclick="() => IncreaseQty(product)">
+                                Add
+                            </button>
+                        }
+                        else
+                        {
+                            <div class="ffshop-grid-qty">
+                                <button class="ffshop-grid-qty-btn"
+                                        @onclick="() => DecreaseQty(product)">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+
+                                <span class="ffshop-grid-qty-value">
+                                    @product.Quantity
+                                </span>
+
+                                <button class="ffshop-grid-qty-btn"
+                                        @onclick="() => IncreaseQty(product)">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <!-- Fixed Footer -->
+    @if (TotalItems > 0)
+    {
+        <button class="ffshop-floating-cart"
+                @onclick="OpenCart">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <span class="ffshop-floating-badge">
+                @TotalItems
+            </span>
+
+        </button>
+    }
+    @if (IsCartOpen)
+    {
+        <div class="ffshop-backdrop"
+            @onclick="CloseCart">
+        </div>
+
+        <div class="ffshop-cart-sheet">
+
+            <div class="ffshop-sheet-handle"></div>
+
+            <div class="ffshop-sheet-header">
+
+                <div class="ffshop-sheet-title">
+                    Your Cart (@TotalItems)
+                </div>
+
+                <button class="ffshop-clear-btn">
+                    Clear All
+                </button>
+
+            </div>
+
+            <div class="ffshop-cart-whole-div">
+            @foreach (var item in Products.Where(x => x.Quantity > 0))
+            {
+                
+                    <div class="ffshop-cart-item">
+
+                        <img class="ffshop-cart-item-image"
+                            src="@item.ImageUrl" />
+
+                        <div class="ffshop-cart-item-content">
+
+                            <div class="ffshop-cart-item-name">
+                                @item.Name
+                            </div>
+
+                            <div class="ffshop-cart-item-price">
+                                ₹@item.Price / carton
+                            </div>
+
+                            <div class="ffshop-qty-row">
+
+                                <button class="ffshop-qty-btn"
+                                        @onclick="() => DecreaseQty(item)">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+
+                                <span class="ffshop-qty-value">
+                                    @item.Quantity
+                                </span>
+
+                                <button class="ffshop-qty-btn"
+                                        @onclick="() => IncreaseQty(item)">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="ffshop-cart-item-total">
+                            ₹@(item.Price * item.Quantity)
+                        </div>
+
+                    </div>
+            }
+            </div>
+
+            <div class="ffshop-summary-section">
+
+                <div class="ffshop-summary-row">
+
+                    <span>Subtotal</span>
+
+                    <span>₹@CartTotal</span>
+
+                </div>
+
+                <div class="ffshop-summary-row">
+
+                    <span>Discount</span>
+
+                    <span>-₹0</span>
+
+                </div>
+
+                <div class="ffshop-grand-total">
+
+                    <span>Total Amount</span>
+
+                    <span>₹@CartTotal</span>
+
+                </div>
+
+            </div>
+
+            <button class="ffshop-place-order-full" @onclick="PlaceOrder">
+                Place Order
+            </button>
+
+        </div>
+    }
+
+</div>

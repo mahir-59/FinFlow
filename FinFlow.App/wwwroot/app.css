@@ -1,5 +1,6 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #fcfaf8;
 }
 
 a, .btn-link {
@@ -24,9 +25,9 @@ h1:focus {
     outline: none;
 }
 
-.valid.modified:not([type=checkbox]) {
+/* .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
-}
+} */
 
 .invalid {
     outline: 1px solid #e50000;
@@ -98,4 +99,17 @@ h1:focus {
     .flex-column, .navbar-brand {
         padding-left: env(safe-area-inset-left);
     }
+}
+
+input.invalid,
+textarea.invalid,
+select.invalid {
+    border-color: #DC2626 !important;
+    border-width: 2px !important;
+}
+
+input.valid,
+textarea.valid,
+select.valid {
+    border-color: #d9d9d9;
 }

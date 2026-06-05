@@ -24,12 +24,11 @@ namespace FinFlow.WebApp.Pages.Auth
         {
             _loaderService.Show();
             bool isLoggedIn = await _loginViewModel.HandleLogin(loginModel);
+            _loaderService.Hide();
             if(!isLoggedIn)
             {
                 _popupService.ShowError("Login failed. Please check your credentials and try again.");
             }
-            await Task.Delay(5000);
-            _loaderService.Hide();
         }
 
         public class LoginModel

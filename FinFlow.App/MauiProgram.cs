@@ -1,4 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FinFlow.App.Components.Pages.Auth;
+using FinFlow.App.Services;
+using FinFlow.Modules.Auth.Auth.BL.Classes;
+using FinFlow.Modules.Auth.Auth.BL.Interfaces;
+using FinFlow.Modules.Base.Base.BL;
+using FinFlow.Modules.Base.Base.Model;
+using Microsoft.Extensions.Logging;
 
 namespace FinFlow.App
 {
@@ -19,6 +25,11 @@ namespace FinFlow.App
 #if DEBUG
 
             builder.Services.AddTransient<NavigationService>();
+            builder.Services.AddSingleton<HttpClient>();
+            builder.Services.AddTransient<TokenStore>();
+            builder.Services.AddTransient<APIRequestHandler>();
+            builder.Services.AddTransient<ILoginViewModel, LoginViewModel>();
+            builder.Services.AddSingleton<LoaderService>();
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif

@@ -1,21 +1,32 @@
 ﻿@page "/verify-otp"
 @layout MainLayout
 
-<div class="otp-page">
+<div class="ff-otp-shell">
 
-    <button class="back-btn" @onclick="GoBack">←</button>
+    <button class="ff-otp-back"
+            @onclick="GoBack">
+        ←
+    </button>
 
-    <h1 class="title-vo">Enter OTP</h1>
+    <h1 class="ff-otp-heading">
+        Enter OTP
+    </h1>
 
-    <p class="description-vo">
-        Enter the 6-digit code sent to <span class="email">john@example.com</span>
+    <p class="ff-otp-description">
+
+        Enter the 6-digit code sent to
+
+        <span class="ff-otp-email">
+            john@example.com
+        </span>
+
     </p>
 
-    <div class="otp-wrapper"
+    <div class="ff-otp-code-wrapper"
          @onclick="FocusInput">
 
         <input @ref="_otpInput"
-               class="hidden-input"
+               class="ff-otp-hidden-input"
                maxlength="6"
                inputmode="numeric"
                value="@OtpValue"
@@ -26,33 +37,52 @@
             var isActive = OtpValue.Length == i;
             var isFilled = OtpValue.Length > i;
 
-            <div class="otp-box
-                @(isActive ? "active" : "")
-                @(isFilled ? "filled" : "")">
+            <div class="
+                 ff-otp-digit-box
+                 @(isFilled ? "ff-otp-digit-filled" : "")
+                 @(isActive ? "ff-otp-digit-active" : "")">
+
                 @(isFilled ? OtpValue[i] : "")
+
             </div>
         }
+
     </div>
 
-    <button class="primary-btn" @onclick="Verifyotp">
+    <button class="ff-otp-verify-btn"
+            @onclick="Verifyotp">
+
         Verify
+
     </button>
 
     @if (CanResend)
     {
-        <p class="resend-text">
-            <a @onclick="ResendOtp">Resend OTP</a>
+        <p class="ff-otp-resend-section">
+
+            <span class="ff-otp-resend-link"
+                  @onclick="ResendOtp">
+
+                Resend OTP
+
+            </span>
+
         </p>
     }
     else
     {
-        <p class="resend-text">
+        <p class="ff-otp-resend-section">
+
             Resend OTP in
-            <span class="timer">@TimeRemaining</span>
+
+            <span class="ff-otp-countdown">
+                @TimeRemaining
+            </span>
+
         </p>
     }
 
-    <div class="secure-text">
+    <div class="ff-otp-security-note">
         ⓘ Your data is 100% secure
     </div>
 
