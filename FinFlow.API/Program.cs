@@ -114,4 +114,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/", () => "FinFlow API Running Successfully");
+
 app.Run();
