@@ -1,4 +1,5 @@
-﻿using FinFlow.Modules.Auth.Auth.Model.Classes.Requests;
+﻿using FinFlow.App.Services;
+using FinFlow.Modules.Auth.Auth.Model.Classes.Requests;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,17 @@ namespace FinFlow.App.Components.Pages.Auth
             _loaderService.Show();
             if(!string.IsNullOrEmpty(LoginRequest.Username) && !string.IsNullOrEmpty(LoginRequest.Password))
             {
-                // bool isLoggedIn = await _loginViewModel.HandleLogin(LoginRequest);
-                // if(!isLoggedIn)
-                // {
-                //     //_popupService.ShowError("Login failed. Please check your credentials and try again.");
-                // }
+                GenericResponse genericResponse = await _loginViewModel.HandleLogin(LoginRequest);
+                if(!genericResponse.IsSuccess)
+                {
+                    _dialogService.ShowError(genericResponse.Message);
+                }
+                else
+                {
+                    _dialogService.ShowSuccess(genericResponse.Message);
+                    _navigationManager.NavigateTo("/landing");
+                }
             }
-            else
-            {
-                // Show error message
-            }
-            _navigationManager.NavigateTo("/landing");
             _loaderService.Hide();
         }
         private void TogglePassword()

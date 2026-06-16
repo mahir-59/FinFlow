@@ -2,11 +2,15 @@ using FinFlow.Modules.Auth.Auth.BL.Classes;
 using FinFlow.Modules.Auth.Auth.BL.Interfaces;
 using FinFlow.Modules.Auth.Auth.DL.Classes;
 using FinFlow.Modules.Auth.Auth.DL.Interfaces;
+using FinFlow.Modules.Items.Items.BL.Classes;
 using FinFlow.Modules.Common.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using FinFlow.Modules.Items.Items.DL.Interfaces;
+using FinFlow.Modules.Items.Items.BL.Interfaces;
+using FinFlow.Modules.Items.Items.DL.Classes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +22,8 @@ builder.Services.AddSingleton<DBContext>();
 builder.Services.AddScoped<SqlHelper>();
 builder.Services.AddScoped<IAuthDL, MSSQLAuthDL>();
 builder.Services.AddScoped<IAuthBL, AuthBL>();
+builder.Services.AddScoped<IItemBL, ItemBL>();
+builder.Services.AddScoped<IItemDL, MSSQLItemDL>();
 
 builder.Services.AddAuthentication(
     JwtBearerDefaults.AuthenticationScheme)

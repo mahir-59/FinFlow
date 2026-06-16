@@ -51,7 +51,13 @@ namespace FinFlow.Modules.Base.Base.BL
 
                 // API Call
                 var response = await _httpClient.SendAsync(request);
-
+                var rawResponse = await response.Content.ReadAsStringAsync();
+                var errorResponse = JsonSerializer.Deserialize<GenericResponse>(
+                    rawResponse,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
                 // Unauthorized
                 if (response.StatusCode == HttpStatusCode.Unauthorized && retry)
                 {
@@ -72,13 +78,13 @@ namespace FinFlow.Modules.Base.Base.BL
                     {
                         IsSuccess = false,
                         StatusCode = 401,
-                        Message = APIResponseConstants.SessionExpired
+                        Message = errorResponse?.Message ?? "UnAuthorized"
                     };
                 }
 
                 // Read Raw Response
-                var rawResponse =
-                    await response.Content.ReadAsStringAsync();
+                // var rawResponse =
+                //     await response.Content.ReadAsStringAsync();
 
                 // Failed
                 if (!response.IsSuccessStatusCode)
@@ -87,7 +93,7 @@ namespace FinFlow.Modules.Base.Base.BL
                     {
                         IsSuccess = false,
                         StatusCode = (int)response.StatusCode,
-                        Message = rawResponse
+                        Message = errorResponse?.Message ?? "InternalServerError"
                     };
                 }
 

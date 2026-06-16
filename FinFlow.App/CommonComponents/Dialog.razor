@@ -1,0 +1,86 @@
+@using FinFlow.App.Services
+@implements IDisposable
+@inject DialogService DialogService
+
+@if (DialogService.IsVisible)
+{
+    <div class="dialog-overlay">
+        <div class="dialog-container @GetDialogClass()">
+
+            <div class="dialog-header">
+                <h4>@DialogService.Title</h4>
+            </div>
+
+            <div class="dialog-body">
+                @DialogService.Message
+            </div>
+
+            <div class="dialog-footer">
+
+                @if (DialogService.IsConfirmation)
+                {
+                    <button class="btn-cancel"
+                            onclick="@DialogService.Cancel">
+                        Cancel
+                    </button>
+
+                    <button class="btn-confirm"
+                            onclick="@DialogService.Confirm">
+                        Confirm
+                    </button>
+                }
+                else
+                {
+                    <button class="btn-confirm"
+                            onclick="@DialogService.Close">
+                        OK
+                    </button>
+                }
+
+            </div>
+
+        </div>
+    </div>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        DialogService.OnShow += Refresh;
+    }
+
+    private void Refresh()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        DialogService.OnShow -= Refresh;
+    }
+
+    private string GetDialogClass()
+    {
+        return DialogService.Type switch
+        {
+            DialogService.DialogType.Success => "success",
+            DialogService.DialogType.Error => "error",
+            DialogService.DialogType.Warning => "warning",
+            DialogService.DialogType.Info => "info",
+            _ => "confirm"
+        };
+    }
+
+    private string GetDialogIcon()
+    {
+        return DialogService.Type switch
+        {
+            DialogService.DialogType.Success => "✓",
+            DialogService.DialogType.Error => "✕",
+            DialogService.DialogType.Warning => "⚠",
+            DialogService.DialogType.Info => "ℹ",
+            _ => "?"
+        };
+    }
+}

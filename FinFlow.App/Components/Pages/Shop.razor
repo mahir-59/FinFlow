@@ -1,4 +1,6 @@
 @page "/shop"
+@using FinFlow.Modules.Items.Items.BL.Interfaces
+@inject IItemViewModel _itemViewModel
 
 <div class="ffshop-page">
 
@@ -66,7 +68,7 @@
                             ₹@product.Price / carton
                         </div>
 
-                        @if (product.Quantity == 0)
+                        @if (product.StockQuantity == 0)
                         {
                             <button class="ffshop-grid-add-btn"
                                     @onclick="() => IncreaseQty(product)">
@@ -82,7 +84,7 @@
                                 </button>
 
                                 <span class="ffshop-grid-qty-value">
-                                    @product.Quantity
+                                    @product.StockQuantity
                                 </span>
 
                                 <button class="ffshop-grid-qty-btn"
@@ -138,7 +140,7 @@
             </div>
 
             <div class="ffshop-cart-whole-div">
-            @foreach (var item in Products.Where(x => x.Quantity > 0))
+            @foreach (var item in Products.Where(x => x.StockQuantity > 0))
             {
                 
                     <div class="ffshop-cart-item">
@@ -164,7 +166,7 @@
                                 </button>
 
                                 <span class="ffshop-qty-value">
-                                    @item.Quantity
+                                    @item.StockQuantity
                                 </span>
 
                                 <button class="ffshop-qty-btn"
@@ -177,7 +179,7 @@
                         </div>
 
                         <div class="ffshop-cart-item-total">
-                            ₹@(item.Price * item.Quantity)
+                            ₹@(item.Price * item.StockQuantity)
                         </div>
 
                     </div>

@@ -1,7 +1,6 @@
 .ffshop-page {
     min-height: 100vh;
     position: relative;
-    padding-top: 40px;
 }
 
 /* ==========================
@@ -167,11 +166,13 @@
 
 .ffshop-products-container {
 
-    height: calc(97vh - 280px);
+    height: calc(100vh - 280px);
 
     overflow-y: auto;
 
     padding-top: 10px;
+
+    padding-bottom: 10px;
 
     flex: 1;
 }
@@ -199,7 +200,7 @@
 
     border: 1px solid #EEE7DA;
 
-    border-radius: 24px;
+    border-radius: 12px;
 
     overflow: hidden;
 
@@ -285,7 +286,7 @@
 
 .ffshop-grid-add-btn {
 
-    margin-top: 16px;
+    margin-top: 8px;
 
     height: 36px;
 
@@ -310,7 +311,7 @@
 
 .ffshop-grid-qty {
 
-    margin-top: 10px;
+    margin-top: 8px;
 
     display: flex;
 

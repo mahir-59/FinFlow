@@ -4,6 +4,8 @@ using FinFlow.Modules.Auth.Auth.BL.Classes;
 using FinFlow.Modules.Auth.Auth.BL.Interfaces;
 using FinFlow.Modules.Base.Base.BL;
 using FinFlow.Modules.Base.Base.Model;
+using FinFlow.Modules.Items.Items.BL.Classes;
+using FinFlow.Modules.Items.Items.BL.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace FinFlow.App
@@ -29,7 +31,9 @@ namespace FinFlow.App
             builder.Services.AddTransient<TokenStore>();
             builder.Services.AddTransient<APIRequestHandler>();
             builder.Services.AddTransient<ILoginViewModel, LoginViewModel>();
+            builder.Services.AddTransient<IItemViewModel, ItemViewModel>();
             builder.Services.AddSingleton<LoaderService>();
+            builder.Services.AddSingleton<DialogService>();
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif

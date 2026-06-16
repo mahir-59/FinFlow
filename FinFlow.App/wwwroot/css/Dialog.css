@@ -1,0 +1,102 @@
+﻿.dialog-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.4);
+
+    z-index: 99999;
+}
+
+.dialog-container {
+    width: 340px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+.dialog-header {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 10px 12px;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.dialog-header h4 {
+    font-size: 14px;
+    margin: 0;
+    color: white;
+}
+
+.dialog-body {
+    padding: 20px;
+    font-size: 14px;
+    color: #212529;
+}
+
+.dialog-footer {
+    padding: 0 12px 12px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-confirm,
+.btn-cancel {
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.btn-confirm {
+    background: #0d6efd;
+    color: white;
+}
+
+.btn-cancel {
+    background: #dc3545;
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media(max-width:768px) {
+
+    .dialog-overlay {
+        bottom: 15px;
+    }
+
+}
+.dialog-container.success .dialog-header {
+    background: #198754;
+}
+.dialog-container.error .dialog-header {
+    background: #dc3545;
+}
+
+.dialog-container.warning .dialog-header {
+    background: #fd7e14;
+}
+.dialog-container.info .dialog-header {
+    background: #0d6efd;
+}
+.dialog-container.confirm .dialog-header {
+    background: #6c757d;
+}

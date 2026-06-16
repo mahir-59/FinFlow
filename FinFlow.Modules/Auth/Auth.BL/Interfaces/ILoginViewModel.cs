@@ -9,6 +9,6 @@ namespace FinFlow.Modules.Auth.Auth.BL.Interfaces
 {
     public interface ILoginViewModel
     {
-        Task<bool> HandleLogin(ILoginRequest loginRequest);
+        Task<GenericResponse> HandleLogin(ILoginRequest loginRequest);
     }
 }

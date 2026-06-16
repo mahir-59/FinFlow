@@ -1,5 +1,4 @@
 .ffh3-page {
-    padding-top: 40px;
     min-height: 100vh;
 }
 
@@ -21,7 +20,7 @@
 
 .ffh3-customer-name {
     margin-top: 6px;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 700;
     color: #202020;
 }
@@ -68,7 +67,7 @@
 .ffh3-outstanding-amount {
     margin-top: 14px;
 
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 700;
 
     color: #B74634;
@@ -103,7 +102,7 @@
 }
 
 .ffh3-stat-number {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 700;
     line-height: 1;
     color: #202020;
@@ -112,7 +111,7 @@
 .ffh3-stat-label {
     margin-top: 12px;
 
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 500;
 
     color: #22694E;
@@ -297,9 +296,6 @@
    SAFE AREA FOR BOTTOM NAV
 =========================== */
 
-.ffh3-page {
-    padding-bottom: 100px;
-}
 
 .ffh3-pay-now-btn {
     border: none;

@@ -26,25 +26,46 @@ namespace FinFlow.Modules.Auth.Auth.BL.Classes
             _apiRequestHandler = aPIRequestHandler;
             _tokenStore = tokenStore;
             _configuration = configuration;
-            _apiBaseUrl = _configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7281";
+            _apiBaseUrl = _configuration["ApiSettings:BaseUrl"] ?? "https://finflow-bbc3hxbshtf9c6h9.southindia-01.azurewebsites.net";
         }
 
-        public async Task<bool> HandleLogin(ILoginRequest loginRequest)
+        public async Task<GenericResponse> HandleLogin(ILoginRequest loginRequest)
         {
             if (loginRequest == null)
             {
-                return false;
+                return new GenericResponse
+                {
+                    IsSuccess = false,
+                    Message = "Invalid request"
+                };
             }
 
-            var response = await _apiRequestHandler.SendAsync<LoginResponse>($"{_apiBaseUrl}/api/Auth/login", HttpMethod.Post, loginRequest);
-            if(response.IsSuccess)
+            var response = await _apiRequestHandler.SendAsync<LoginResponse>(
+                $"{_apiBaseUrl}/api/Auth/login",
+                HttpMethod.Post,
+                loginRequest);
+
+            if (response.IsSuccess)
             {
                 var data = response.Data;
+
                 _tokenStore.AccessToken = data.AccessToken;
                 _tokenStore.RefreshToken = data.RefreshToken;
-                return true;
+
+                return new GenericResponse
+                {
+                    IsSuccess = true,
+                    StatusCode = response.StatusCode,
+                    Message = "Login Successful"
+                };
             }
-            return false;
+
+            return new GenericResponse
+            {
+                IsSuccess = false,
+                StatusCode = response.StatusCode,
+                Message = response.Message
+            };
         }
     }
 }
