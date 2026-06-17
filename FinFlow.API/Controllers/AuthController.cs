@@ -151,8 +151,8 @@ namespace FinFlow.API.Controllers
                         AccessToken = accessToken,
 
                         RefreshToken = refreshToken,
-                        
-                        UserData = user
+
+                        UserData = user as UserEntity
                     };
 
                 return Ok(
