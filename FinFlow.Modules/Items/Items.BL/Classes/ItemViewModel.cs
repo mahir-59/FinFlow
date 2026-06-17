@@ -23,7 +23,7 @@ namespace FinFlow.Modules.Items.Items.BL.Classes
         public async Task<List<ItemResponse>> GetAllItems()
         {
             var response = await _apiRequestHandler.SendAsync<List<ItemResponse>>(
-                $"{_apiBaseUrl}/api/Items",
+                $"{_apiBaseUrl}/api/Items/GetAllItems",
                 HttpMethod.Get,
                 null);
 

@@ -1,4 +1,6 @@
 @page "/landing"
+@using FinFlow.Modules.Base.Base.Model
+@inject TokenStore _tokenStore
 
 <div class="ffh3-page">
 
@@ -13,7 +15,7 @@
             </div>
 
             <div class="ffh3-customer-name">
-                @CustomerName
+                @_tokenStore.UserDetails
             </div>
 
         </div>

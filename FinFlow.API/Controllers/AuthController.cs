@@ -150,7 +150,9 @@ namespace FinFlow.API.Controllers
                     {
                         AccessToken = accessToken,
 
-                        RefreshToken = refreshToken
+                        RefreshToken = refreshToken,
+                        
+                        UserData = user
                     };
 
                 return Ok(

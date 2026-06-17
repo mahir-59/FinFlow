@@ -13,6 +13,7 @@ namespace FinFlow.Modules.Items.Items.Model.Classes
         public decimal Price { get; set; }
 
         public int StockQuantity { get; set; }
+        public int NetQty { get; set; }
 
         public string? ImageUrl { get; set; }
     }

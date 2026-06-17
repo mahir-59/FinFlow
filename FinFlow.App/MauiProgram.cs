@@ -24,18 +24,23 @@ namespace FinFlow.App
 
             builder.Services.AddMauiBlazorWebView();
 
-#if DEBUG
-
+            // NOTE: These services must be registered for ALL build configurations.
+            // Previously they were inside #if DEBUG, so they were missing in Release
+            // builds (used when deploying to a physical device). Components such as
+            // Dialog/Loader inject DialogService/LoaderService, and the missing
+            // registrations caused a silent exception on first render -> blank screen.
             builder.Services.AddTransient<NavigationService>();
             builder.Services.AddSingleton<HttpClient>();
-            builder.Services.AddTransient<TokenStore>();
+            builder.Services.AddSingleton<TokenStore>();
             builder.Services.AddTransient<APIRequestHandler>();
             builder.Services.AddTransient<ILoginViewModel, LoginViewModel>();
             builder.Services.AddTransient<IItemViewModel, ItemViewModel>();
             builder.Services.AddSingleton<LoaderService>();
             builder.Services.AddSingleton<DialogService>();
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+
+#if DEBUG
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

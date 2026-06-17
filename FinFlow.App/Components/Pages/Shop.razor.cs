@@ -17,12 +17,13 @@ public partial class Shop : ComponentBase
     ];
 
     private List<ItemResponse> Products { get; set; } = new();
+    private List<CartItemsResponse> _cartItems { get; set; } = new();
 
     private int TotalItems =>
-        Products.Sum(x => x.StockQuantity);
+        Products.Sum(x => x.NetQty);
 
     private decimal CartTotal =>
-        Products.Sum(x => x.Price * x.StockQuantity);
+        Products.Sum(x => x.Price * x.NetQty);
 
     protected override async Task OnInitializedAsync()
     {
@@ -43,13 +44,15 @@ public partial class Shop : ComponentBase
 
     private void IncreaseQty(ItemResponse product)
     {
-        product.StockQuantity++;
+        var random = new Random();
+        int number = random.Next(100000, 1000000);
+        product.NetQty++;
     }
 
     private void DecreaseQty(ItemResponse product)
     {
-        if (product.StockQuantity > 0)
-            product.StockQuantity--;
+        if (product.NetQty > 0)
+            product.NetQty--;
     }
 
     private void SelectCategory(string category)

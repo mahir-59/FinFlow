@@ -51,6 +51,7 @@ namespace FinFlow.Modules.Auth.Auth.BL.Classes
 
                 _tokenStore.AccessToken = data.AccessToken;
                 _tokenStore.RefreshToken = data.RefreshToken;
+                _tokenStore.UserDetails = data.UserData;
 
                 return new GenericResponse
                 {

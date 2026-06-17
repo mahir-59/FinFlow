@@ -55,8 +55,8 @@
                 <div class="ffshop-grid-card">
 
                     <img class="ffshop-grid-image"
-                        src="@product.ImageUrl"
-                        alt="@product.Name" />
+                        src="images/product-placeholder.png"
+                        alt="" />
 
                     <div class="ffshop-grid-body">
 
@@ -68,7 +68,7 @@
                             ₹@product.Price / carton
                         </div>
 
-                        @if (product.StockQuantity == 0)
+                        @if (product.NetQty == 0)
                         {
                             <button class="ffshop-grid-add-btn"
                                     @onclick="() => IncreaseQty(product)">
@@ -84,7 +84,7 @@
                                 </button>
 
                                 <span class="ffshop-grid-qty-value">
-                                    @product.StockQuantity
+                                    @product.NetQty
                                 </span>
 
                                 <button class="ffshop-grid-qty-btn"
@@ -140,13 +140,13 @@
             </div>
 
             <div class="ffshop-cart-whole-div">
-            @foreach (var item in Products.Where(x => x.StockQuantity > 0))
+            @foreach (var item in Products.Where(x => x.NetQty > 0))
             {
                 
                     <div class="ffshop-cart-item">
 
                         <img class="ffshop-cart-item-image"
-                            src="@item.ImageUrl" />
+                            src="images/product-placeholder.png" />
 
                         <div class="ffshop-cart-item-content">
 
@@ -166,7 +166,7 @@
                                 </button>
 
                                 <span class="ffshop-qty-value">
-                                    @item.StockQuantity
+                                    @item.NetQty
                                 </span>
 
                                 <button class="ffshop-qty-btn"
@@ -179,7 +179,7 @@
                         </div>
 
                         <div class="ffshop-cart-item-total">
-                            ₹@(item.Price * item.StockQuantity)
+                            ₹@(item.Price * item.NetQty)
                         </div>
 
                     </div>
