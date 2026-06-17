@@ -1,3 +1,5 @@
+using FinFlow.Modules.Items.Items.Model.Interfaces;
+
 namespace FinFlow.Modules.Items.Items.Model.Classes
 {
     public class ItemResponse : IItemResponse
