@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using AndroidX.Core.View;
 
 namespace FinFlow.App
 {
@@ -11,8 +12,17 @@ namespace FinFlow.App
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            var color = Android.Graphics.Color.ParseColor("#fcfaf8");
+            Window?.SetStatusBarColor(color);
+            Window?.SetNavigationBarColor(color);
 
-            Android.Util.Log.Debug("FINFLOW", "MainActivity Created");
+            var controller = WindowCompat.GetInsetsController(Window, Window.DecorView);
+
+            if (controller != null)
+            {
+                controller.AppearanceLightStatusBars = true;
+                controller.AppearanceLightNavigationBars = true;
+            }
         }
     }
 }
