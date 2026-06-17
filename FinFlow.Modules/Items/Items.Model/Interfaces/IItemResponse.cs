@@ -1,4 +1,4 @@
-namespace FinFlow.Modules.Items.Items.Model.Classes
+namespace FinFlow.Modules.Items.Items.Model.Interfaces
 {
     public class IItemResponse
     {
