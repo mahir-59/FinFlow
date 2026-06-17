@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FinFlow.Modules.Items.Items.BL.Interfaces;
 using FinFlow.Modules.Items.Items.BL.Classes;
+using FinFlow.Modules.Common.Models;
+using FinFlow.Modules.Auth.Auth.Model.Classes.Responses;
+using FinFlow.Modules.Items.Items.Model.Classes;
+using FinFlow.Modules.Items.Items.Model.Interfaces;
 
 namespace FinFlow.API.Controllers
 {
@@ -23,7 +27,17 @@ namespace FinFlow.API.Controllers
             try
             {
                 var items = await _itemsBL.GetAllItems();
-                return Ok(items);
+                return Ok(
+                    new ApiResponse<List<IItemResponse>>
+                    {
+                        StatusCode = 200,
+
+                        IsSuccess = true,
+
+                        Message = "Items retrieved successfully",
+
+                        Data = items
+                    });
             }
             catch (Exception ex)
             {
