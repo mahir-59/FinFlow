@@ -14,6 +14,6 @@ namespace FinFlow.Modules.Auth.Auth.Model.Classes.Responses
         public string AccessToken { get; set; }
 
         public string RefreshToken { get; set; }
-        public IUserEntity UserData { get; set; }
+        public UserEntity UserData { get; set; }
     }
 }

@@ -14,6 +14,6 @@ namespace FinFlow.Modules.Base.Base.Model
 
         public string RefreshToken { get; set; } = string.Empty;
 
-        public IUserEntity UserDetails { get; set; }
+        public UserEntity UserDetails { get; set; }
     }
 }
